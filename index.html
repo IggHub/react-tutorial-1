@@ -9,8 +9,65 @@
 <script src="https://fb.me/react-dom-0.14.6.js"></script>
 <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
 <script type="text/jsx">
-/*Add your React code here*/
+  /*props data*/
+  var DONUTINFO = {
+    name: 'Donutman',
+    favoriteDonut: 'Glazed',
+    superMoves: ['pastry', 'dessert', 'hero'],
+    epilogue: 'Eat your donut, kids!'
+  };
 
+  /*Main App*/
+  var DonutApp = React.createClass({
+    render: function(){
+      return (
+        <div>
+          <h2>Hello {this.props.profileData.name}!</h2>
+          <Info
+            name={this.props.profileData.name}
+            favoriteDonutz = {this.props.profileData.favoriteDonut}
+          />
+          <SuperPower superMoves = {this.props.profileData.superMoves} />
+          <Epilogue />
+        </div>
+      );
+    }
+  });
+
+  var Info = React.createClass({
+    render: function(){
+      return (
+        <div>
+          <p>Favorite donut: {this.props.favoriteDonutz}</p>
+          <p>Name: {this.props.name}</p>
+        </div>
+      )
+    }
+  });
+
+  var SuperPower = React.createClass({
+    render: function(){
+      var supermoves = this.props.superMoves.map(function(supermove, index){
+        return (<li key={index}>Its a {supermove}!</li>)
+      });
+
+      return (
+        <div>
+          <ul>
+            {supermoves}
+          </ul>
+        </div>
+      )
+    }
+  });
+
+  var Epilogue = React.createClass({
+    render: function(){
+      return (<div>Eat your pastry, kids</div>)
+    }
+  })
+
+  ReactDOM.render(<DonutApp profileData = {DONUTINFO} />, document.getElementById("content"));
 
 </script>
 </body>
